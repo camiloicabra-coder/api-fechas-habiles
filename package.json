@@ -1,0 +1,28 @@
+{
+  "name": "api-fechas-habiles",
+  "version": "1.0.0",
+  "main": "dist/index.js",
+  "scripts": {
+    "build": "tsc",
+    "start": "node dist/index.js",
+    "dev": "ts-node-dev --respawn --transpile-only src/index.ts",
+    "test": "jest",
+    "test:fechas": "jest src/_tests_/workingDate.service.test.ts --runInBand"
+  },
+  "dependencies": {
+    "axios": "^1.12.2",
+    "dayjs": "^1.11.18",
+    "express": "^4.21.2",
+    "tz-offset": "^0.0.2"
+  },
+  "devDependencies": {
+    "@types/express": "^4.17.23",
+    "@types/node": "^20.19.15",
+    "ts-node-dev": "^2.0.0",
+    "typescript": "^5.9.2"
+  },
+  "description": "",
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}
