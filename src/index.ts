@@ -4,20 +4,29 @@ import { loadHolidays } from "./utils/calendar.utils";
 
 const app = express();
 
-// Middlewares
+// Middleware
 app.use(express.json());
 
-// Ruta raíz de prueba
+// Ruta raíz
 app.get("/", (req, res) => {
   res.json({ message: "API de Fechas Hábiles funcionando 🚀" });
 });
 
-// Tus rutas de negocio
+// Rutas de negocio
 app.use("/working-date", workingDateRoutes);
 
-// Cargamos festivos al iniciar
+// Cargar festivos
 (async () => {
   await loadHolidays();
 })();
 
-module.exports = app;
+// Si estamos en local, arrancamos con app.listen
+if (process.env.NODE_ENV !== "production") {
+  const PORT = process.env.PORT || 3000;
+  app.listen(PORT, () => {
+    console.log(`✅ Server running on http://localhost:${PORT}`);
+  });
+}
+
+// 👉 En Vercel no usamos app.listen, solo exportamos
+export default app;
