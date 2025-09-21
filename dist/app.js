@@ -9,7 +9,7 @@ const app = (0, express_1.default)();
 app.use(express_1.default.json());
 // Ruta raíz (para verificación en Vercel)
 app.get("/", (req, res) => {
-    res.send("🚀 API Fechas Hábiles corriendo en Vercel!");
+    res.send(" API Fechas Hábiles corriendo en Vercel!");
 });
 // Rutas de la API
 app.use("/working-date", workingDate_routes_1.default);
