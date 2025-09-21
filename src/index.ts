@@ -20,4 +20,4 @@ app.use("/working-date", workingDateRoutes);
   await loadHolidays();
 })();
 
-export default app;
+module.exports = app;

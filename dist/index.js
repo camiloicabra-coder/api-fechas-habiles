@@ -19,4 +19,4 @@ app.use("/working-date", workingDate_routes_1.default);
 (async () => {
     await (0, calendar_utils_1.loadHolidays)();
 })();
-exports.default = app;
+module.exports = app;
