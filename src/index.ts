@@ -3,15 +3,21 @@ import workingDateRoutes from "./routes/workingDate.routes";
 import { loadHolidays } from "./utils/calendar.utils";
 
 const app = express();
-const PORT = process.env.PORT || 3000;
 
+// Middlewares
 app.use(express.json());
-app.use("/", workingDateRoutes);
 
+// Ruta raíz de prueba
+app.get("/", (req, res) => {
+  res.json({ message: "API de Fechas Hábiles funcionando 🚀" });
+});
+
+// Tus rutas de negocio
+app.use("/working-date", workingDateRoutes);
+
+// Cargamos festivos al iniciar
 (async () => {
-  await loadHolidays(); //  cargamos los festivos al iniciar
-
-  app.listen(PORT, () => {
-    console.log(` Server running on http://localhost:${PORT}`);
-  });
+  await loadHolidays();
 })();
+
+export default app;
