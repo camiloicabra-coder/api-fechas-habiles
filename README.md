@@ -108,7 +108,7 @@ Estos son las peticiones probadas directamente en la API desplegada en Vercel:
    👉 [https://api-fechas-habiles.vercel.app/working-date?date=2025-04-10T20:00:00.000Z&days=5&hours=4](https://api-fechas-habiles.vercel.app/working-date?date=2025-04-10T20:00:00.000Z&days=5&hours=4)
 
    Para este caso la salida deberia ser 
-    "date": "2025-04-22T17:00:00Z" 
+   "date":"2025-04-22T15:00:00Z"
     no 
     21 de abril a las 3:30 p.m. (hora Colombia) → "2025-04-21T20:00:00.000Z" (UTC)
     ya que según las reglas de negocio se deben sumar las hora dando como resultado una fecha diferente 
