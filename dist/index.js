@@ -63,6 +63,8 @@ app.get("/", (req, res) => {
 });
 app.use("/", workingDate_routes_1.default);
 // Cargar festivos
+// Cargar festivos al arrancar
+(0, calendar_utils_1.loadHolidays)();
 (async () => {
     await (0, calendar_utils_1.loadHolidays)();
 })();
