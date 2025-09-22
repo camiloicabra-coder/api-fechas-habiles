@@ -1,6 +1,9 @@
 import dayjs from "dayjs";
 import utc from "dayjs/plugin/utc";
 import timezone from "dayjs/plugin/timezone";
+import path from "path";
+import fs from "fs";
+
 
 dayjs.extend(utc);
 dayjs.extend(timezone);
@@ -13,16 +16,18 @@ export const HOLIDAYS = [
   "2025-04-18",
 ];*/
 
-// Variable global para cachear los festivos
+// Variable global para cachear festivos
 let HOLIDAYS: string[] = [];
 
-// Cargar festivos desde el endpoint
-export const loadHolidays = async () => {
-  const response = await fetch("https://content.capta.co/Recruitment/WorkingDays.json");
-  const data: string[] = await response.json();
-  HOLIDAYS = data;
+// Cargar festivos desde un JSON local (no remoto)
+export const loadHolidays = () => {
+  if (HOLIDAYS.length === 0) {
+    const filePath = path.join(__dirname, "holidays.json");
+    const rawData = fs.readFileSync(filePath, "utf-8");
+    HOLIDAYS = JSON.parse(rawData);
+  }
+  return HOLIDAYS;
 };
-
 export const isHoliday = (date: dayjs.Dayjs): boolean => {
   return HOLIDAYS.includes(date.format("YYYY-MM-DD"));
 };
