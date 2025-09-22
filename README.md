@@ -103,6 +103,11 @@ GET /working-date?date=2025-09-19T17:00:00.000Z&hours=1
   "date": "2025-09-22T14:00:00Z"
 }
 
+Peticion en Vercel
+https://api-fechas-habiles.vercel.app/working-date?date=2025-09-19T22:00:00.000Z&hours=1
+<img width="832" height="183" alt="image" src="https://github.com/user-attachments/assets/9d60cf5f-b66d-4eda-a1d3-40f8b50048a6" />
+ 
+
 # 2. Petición un sábado a las 2:00 p.m. con "hours=1"
 Resultado esperado: lunes a las 9:00 a.m. (hora Colombia) → "2025-XX-XXT14:00:00Z" (UTC)
 
