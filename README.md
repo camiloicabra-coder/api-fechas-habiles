@@ -47,7 +47,7 @@ https://api-fechas-habiles.vercel.app/working-date
    npm install axios dayjs
    npm install --save-dev jest ts-jest @types/jest
   
-   Ejecución de test 
+   **Ejecución de test 
 
    npm test
 
@@ -81,40 +81,44 @@ https://api-fechas-habiles.vercel.app/working-date
 Estos son las peticiones probadas directamente en la API desplegada en Vercel:
 
 1. **Viernes 5:00 p.m. + 1 hora → Lunes 9:00 a.m.**  
-   👉 [Probar](https://api-fechas-habiles.vercel.app/working-date?date=2025-09-19T22:00:00.000Z&hours=1)
+   👉 [https://api-fechas-habiles.vercel.app/working-date?date=2025-09-19T22:00:00.000Z&hours=1](https://api-fechas-habiles.vercel.app/working-date?date=2025-09-19T22:00:00.000Z&hours=1)
 
 2. **Sábado 2:00 p.m. + 1 hora → Lunes 9:00 a.m.**  
-   👉 [Probar](https://api-fechas-habiles.vercel.app/working-date?date=2025-09-20T19:00:00.000Z&hours=1)
+   👉 [https://api-fechas-habiles.vercel.app/working-date?date=2025-09-20T19:00:00.000Z&hours=1](https://api-fechas-habiles.vercel.app/working-date?date=2025-09-20T19:00:00.000Z&hours=1)
 
 3. **Martes 3:00 p.m. + 1 día + 4 horas → Jueves 10:00 a.m.**  
-   👉 [Probar](https://api-fechas-habiles.vercel.app/working-date?date=2025-09-16T20:00:00.000Z&days=1&hours=4)
+   👉 [https://api-fechas-habiles.vercel.app/working-date?date=2025-09-16T20:00:00.000Z&days=1&hours=4](https://api-fechas-habiles.vercel.app/working-date?date=2025-09-16T20:00:00.000Z&days=1&hours=4)
 
 4. **Domingo 6:00 p.m. + 1 día → Lunes 5:00 p.m.**  
-   👉 [Probar](https://api-fechas-habiles.vercel.app/working-date?date=2025-09-21T23:00:00.000Z&days=1)
+   👉 [https://api-fechas-habiles.vercel.app/working-date?date=2025-09-21T23:00:00.000Z&days=1](https://api-fechas-habiles.vercel.app/working-date?date=2025-09-21T23:00:00.000Z&days=1)
 
 5. **Laboral 8:00 a.m. + 8 horas → 5:00 p.m.**  
-   👉 [Probar](https://api-fechas-habiles.vercel.app/working-date?date=2025-09-18T13:00:00.000Z&hours=8)
+   👉 [https://api-fechas-habiles.vercel.app/working-date?date=2025-09-18T13:00:00.000Z&hours=8](https://api-fechas-habiles.vercel.app/working-date?date=2025-09-18T13:00:00.000Z&hours=8)
 
 6. **Laboral 8:00 a.m. + 1 día → siguiente día 8:00 a.m.**  
-   👉 [Probar](https://api-fechas-habiles.vercel.app/working-date?date=2025-09-18T13:00:00.000Z&days=1)
+   👉 [https://api-fechas-habiles.vercel.app/working-date?date=2025-09-18T13:00:00.000Z&days=1](https://api-fechas-habiles.vercel.app/working-date?date=2025-09-18T13:00:00.000Z&days=1)
 
 7. **Laboral 12:30 p.m. + 1 día → siguiente día 12:00 p.m.**  
-   👉 [Probar](https://api-fechas-habiles.vercel.app/working-date?date=2025-09-18T17:30:00.000Z&days=1)
+   👉 [https://api-fechas-habiles.vercel.app/working-date?date=2025-09-18T17:30:00.000Z&days=1](https://api-fechas-habiles.vercel.app/working-date?date=2025-09-18T17:30:00.000Z&days=1)
 
 8. **Laboral 11:30 a.m. + 3 horas → 3:30 p.m.**  
-   👉 [Probar](https://api-fechas-habiles.vercel.app/working-date?date=2025-09-18T16:30:00.000Z&hours=3)
+   👉 [https://api-fechas-habiles.vercel.app/working-date?date=2025-09-18T16:30:00.000Z&hours=3](https://api-fechas-habiles.vercel.app/working-date?date=2025-09-18T16:30:00.000Z&hours=3)
 
 9. **Caso con festivos: 10 abril 2025 3:00 p.m. + 5 días + 4 horas**  
-   👉 [Probar](https://api-fechas-habiles.vercel.app/working-date?date=2025-04-10T20:00:00.000Z&days=5&hours=4)
+   👉 [https://api-fechas-habiles.vercel.app/working-date?date=2025-04-10T20:00:00.000Z&days=5&hours=4](https://api-fechas-habiles.vercel.app/working-date?date=2025-04-10T20:00:00.000Z&days=5&hours=4)
 
-   En este test la salida no se  ya que la salida esperada no esta tomando en cuenta las horas que se asignan que son 4.
+   Para este caso la salida deberia ser 
+    "date": "2025-04-22T17:00:00Z" 
+    no 
+    21 de abril a las 3:30 p.m. (hora Colombia) → "2025-04-21T20:00:00.000Z" (UTC)
+    ya que según las reglas de negocio se deben sumar las hora dando como resultado una fecha diferente 
 
 
 10. **Caso sin `date` (usa fecha actual):**  
-    👉 [Probar](https://api-fechas-habiles.vercel.app/working-date?days=1)
+    👉 [https://api-fechas-habiles.vercel.app/working-date?days=1](https://api-fechas-habiles.vercel.app/working-date?days=1)
 
 11. **Caso de error (parámetros inválidos):**  
-    👉 [Probar](https://api-fechas-habiles.vercel.app/working-date?date=fechaInvalida)
+    👉 [https://api-fechas-habiles.vercel.app/working-date?date=fechaInvalida](https://api-fechas-habiles.vercel.app/working-date?date=fechaInvalida)
 
 ---
 
