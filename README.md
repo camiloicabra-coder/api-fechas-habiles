@@ -1,189 +1,151 @@
-#  API de Fechas Hábiles (Colombia)
+# 📅 API de Fechas Hábiles (Colombia)
 
 Este proyecto implementa un servicio para calcular **fechas hábiles en Colombia**, considerando:
 - Horario laboral (8:00 a.m. – 5:00 p.m. con 1 hora de almuerzo).
 - Fines de semana.
 - Festivos colombianos.
 
-Es una prueba técnica desarrollada en **Node.js + TypeScript**.
+La API está construida en **Node.js + TypeScript + Express** y desplegada en **Vercel**.
 
 ---
 
-## Instalación manual
+## 🚀 Enlace Principal
 
-# bash
-# 1. Clonar el repositorio
-git clone https://github.com/TU_USUARIO/api-fechas-habiles.git
-cd api-fechas-habiles
+👉 [API en Producción](https://api-fechas-habiles.vercel.app/)
 
-# 2. Instalación dependencias
+Mensaje de bienvenida:  
+```
+https://api-fechas-habiles.vercel.app/
+```
 
-npm install
-
----
-
-## Ejecucion 
-
-# bash
-ejecutar el comando
-npm run dev
-
-la API estara disponible en:
-**http://localhost:3000**
-
-----
-
-## Uso del endpoint
-
-GET /working-date?date=<ISODate>&days=<n>&hours=<n>
-
-date → Fecha en UTC
-days → Número de días hábiles a sumar
-hours → Número de horas hábiles a sumar
-
-#### Ejemplo
-
-GET /working-date?date=2025-09-15T12:30:00.000Z&days=1
-
-Respuesta
-
-{
-  "date": "2025-09-16T17:00:00Z"
-}
+Ruta principal de cálculo:  
+```
+https://api-fechas-habiles.vercel.app/working-date
+```
 
 ---
 
-###  Manejo de errores
-Todos los errores siguen un formato estándar:
+## 📌 Requisitos
 
-#### Ejemplo parametros invalidos json
-
-GET /working-date?date=2025-09-15T12:30:00.000Z
-
-# respuesta json
-{
-  "error": "InvalidParameters",
-  "message": "Debe enviar al menos uno de los parámetros: days o hours"
-}
+- Node.js **18+**
+- npm (incluido con Node)
+- Opcional: [Postman](https://www.postman.com/) para probar las peticiones
 
 ---
 
-## Tests
+## ⚙️ Instalación y ejecución local
 
-El proyecto incluye tests automáticos con Jest que validan casos como:
+1. Clonar el repositorio:
+   ```bash
+   git clone https://github.com/camiloicabra-coder/api-fechas-habiles.git
+   cd api-fechas-habiles
+   ```
 
-Cálculo en días laborales.
-Ajustes en fines de semana.
-Respeto por la hora de almuerzo.
-Inclusión de festivos colombianos.
+2. Instalar dependencias:
+   ```bash
+   npm install
+   npm install axios dayjs
+   npm install --save-dev jest ts-jest @types/jest
+  
+   Ejecución de test 
 
-## Instalación de dependencias de testing
+   npm test
 
-# Dependencias necesarias para la API
+   ```
 
-# bash 
-npm install axios dayjs
+3. Compilar el proyecto:
+   ```bash
+   npm run build
+   ```
 
-# Dependencias de desarrollo para pruebas
-npm install --save-dev jest ts-jest @types/jest
+4. Ejecutar en modo desarrollo:
+   ```bash
+   npm run dev
+   ```
 
-## Ejecución de test 
+5. Ejecutar en producción local:
+   ```bash
+   npm start
+   ```
 
-# bash
-npm test
+6. Probar en navegador o Postman:
+   ```
+   http://localhost:3000/
+   http://localhost:3000/working-date?date=2025-09-15T13:00:00.000Z&hours=8
+   ```
 
-# Ejemplos de test
+---
 
-# 1. Petición un viernes a las 5:00 p.m. con "hours=1"
-Resultado esperado: lunes a las 9:00 a.m. (hora Colombia) → "2025-XX-XXT14:00:00Z" (UTC)
+## 🧪 Escenarios de prueba
 
-GET /working-date?date=2025-09-19T17:00:00.000Z&hours=1
+Estos son las peticiones probadas directamente en la API desplegada en Vercel:
 
-{
-  "date": "2025-09-22T14:00:00Z"
-}
+1. **Viernes 5:00 p.m. + 1 hora → Lunes 9:00 a.m.**  
+   👉 [Probar](https://api-fechas-habiles.vercel.app/working-date?date=2025-09-19T22:00:00.000Z&hours=1)
 
-Peticion en Vercel
-https://api-fechas-habiles.vercel.app/working-date?date=2025-09-19T22:00:00.000Z&hours=1
-<img width="832" height="183" alt="image" src="https://github.com/user-attachments/assets/9d60cf5f-b66d-4eda-a1d3-40f8b50048a6" />
- 
+2. **Sábado 2:00 p.m. + 1 hora → Lunes 9:00 a.m.**  
+   👉 [Probar](https://api-fechas-habiles.vercel.app/working-date?date=2025-09-20T19:00:00.000Z&hours=1)
 
-# 2. Petición un sábado a las 2:00 p.m. con "hours=1"
-Resultado esperado: lunes a las 9:00 a.m. (hora Colombia) → "2025-XX-XXT14:00:00Z" (UTC)
+3. **Martes 3:00 p.m. + 1 día + 4 horas → Jueves 10:00 a.m.**  
+   👉 [Probar](https://api-fechas-habiles.vercel.app/working-date?date=2025-09-16T20:00:00.000Z&days=1&hours=4)
 
-GET /working-date?date=2025-09-20T14:00:00.000Z&hours=1
+4. **Domingo 6:00 p.m. + 1 día → Lunes 5:00 p.m.**  
+   👉 [Probar](https://api-fechas-habiles.vercel.app/working-date?date=2025-09-21T23:00:00.000Z&days=1)
 
-{
-  "date": "2025-09-22T14:00:00Z"
-}
+5. **Laboral 8:00 a.m. + 8 horas → 5:00 p.m.**  
+   👉 [Probar](https://api-fechas-habiles.vercel.app/working-date?date=2025-09-18T13:00:00.000Z&hours=8)
 
-# 3. Petición con "days=1" y "hours=4" desde un martes a las 3:00 p.m.
-Resultado esperado: jueves a las 10:00 a.m. (hora Colombia) → "2025-XX-XXT15:00:00Z" (UTC)
+6. **Laboral 8:00 a.m. + 1 día → siguiente día 8:00 a.m.**  
+   👉 [Probar](https://api-fechas-habiles.vercel.app/working-date?date=2025-09-18T13:00:00.000Z&days=1)
 
-GET /working-date?date=2025-09-16T15:00:00.000Z&days=1&hours=4
+7. **Laboral 12:30 p.m. + 1 día → siguiente día 12:00 p.m.**  
+   👉 [Probar](https://api-fechas-habiles.vercel.app/working-date?date=2025-09-18T17:30:00.000Z&days=1)
 
-{
-  "date": "2025-09-18T15:00:00Z"
-}
+8. **Laboral 11:30 a.m. + 3 horas → 3:30 p.m.**  
+   👉 [Probar](https://api-fechas-habiles.vercel.app/working-date?date=2025-09-18T16:30:00.000Z&hours=3)
 
-# 4. Petición con "days=1"  desde un domingo a las 6:00 p.m.
-Resultado esperado: lunes a las 5:00 p.m. (hora Colombia) → "2025-XX-XXT22:00:00Z" (UTC)
+9. **Caso con festivos: 10 abril 2025 3:00 p.m. + 5 días + 4 horas**  
+   👉 [Probar](https://api-fechas-habiles.vercel.app/working-date?date=2025-04-10T20:00:00.000Z&days=5&hours=4)
 
-GET /working-date?date=2025-09-21T18:00:00.000Z&days=1
+   En este test la salida no se  ya que la salida esperada no esta tomando en cuenta las horas que se asignan que son 4.
 
-{
-  "date": "2025-09-22T22:00:00Z"
-}
 
-# 5. Petición con "hours=8"  desde un día laboral a las 8:00 a.m.
-Resultado esperado: mismo día a las 5:00 p.m. (hora Colombia) → "2025-XX-XXT22:00:00Z" (UTC)
+10. **Caso sin `date` (usa fecha actual):**  
+    👉 [Probar](https://api-fechas-habiles.vercel.app/working-date?days=1)
 
-GET /working-date?date=2025-09-17T08:00:00.000Z&hours=8
+11. **Caso de error (parámetros inválidos):**  
+    👉 [Probar](https://api-fechas-habiles.vercel.app/working-date?date=fechaInvalida)
 
-{
-  "date": "2025-09-17T22:00:00Z"
-}
+---
 
-# 6. Petición con "days=1"  desde un día laboral a las 8:00 a.m.
-Resultado esperado: siguiente día laboral a las 8:00 a.m. (hora Colombia) → "2025-XX-XXT13:00:00Z" (UTC)
+## 🧑‍💻 Scripts disponibles
 
-GET /working-date?date=2025-09-17T08:00:00.000Z&days=1
+- `npm run dev` → Ejecuta en modo desarrollo con recarga automática.  
+- `npm run build` → Compila TypeScript a JavaScript en carpeta `dist/`.  
+- `npm start` → Ejecuta el servidor desde la carpeta compilada.  
+- `npm test` → Ejecuta todos los tests con Jest.  
+- `npm run test:fechas` → Ejecuta las pruebas unitarias de cálculo de fechas.  
 
-{
-  "date": "2025-09-18T13:00:00Z"
-}
+---
 
-# 7. Petición con "days=1"  desde un día laboral a las 12:30 p.m.
-Resultado esperado: siguiente día laboral a las 12:00 p.m. (hora Colombia) → "2025-XX-XXT17:00:00Z" (UTC)
+## ☁️ Despliegue en Vercel
 
-GET /working-date?date=2025-09-17T12:30:00.000Z&days=1
+1. Instalar Vercel CLI:
+   ```bash
+   npm install -g vercel
+   ```
 
-{
-  "date": "2025-09-18T17:00:00Z"
-}
+2. Conectar el proyecto a Vercel:
+   ```bash
+   vercel
+   ```
 
-# 8. Petición con "hours=3"  desde un día laboral a las 11:30 p.m.
-Resultado esperado: mismo día laboral a las 3:30 p.m. (hora Colombia) → 2025-XX-XXT20:30:00Z (UTC)
+3. Desplegar en producción:
+   ```bash
+   vercel --prod
+   ```
 
-GET /working-date?date=2025-09-17T11:30:00.000Z&hours=3
+---
 
-{
-  "date": "2025-09-17T20:30:00Z"
-}
-
-# 9. Petición con "date=2025-04-10T15:00:00.000Z" y "days=5" y "hours=4"  (el 17 y 18 de abril son festivos)
-Resultado esperado: 21 de abril a las 3:30 p.m. (hora Colombia) → "2025-04-21T20:00:00.000Z" (UTC)
-
-GET /working-date?date=2025-04-10T15:00:00.000Z&days=5&hours=4
-
-{
-  "date": "2025-04-22T15:00:00Z"
-}
-
-En este test la salida no se cumple ya que la salida esperada no esta tomando en cuenta las horas que se asignan que son 4.
-
-## Autor
-
-Camilo Ignacio Cabra Menjura
-
-https://github.com/camiloicabra-coder/api-fechas-habiles
+✍️ Autor: **Camilo Ignacio Cabra Menjura**  
+📌 Proyecto técnico de fechas hábiles en Colombia
